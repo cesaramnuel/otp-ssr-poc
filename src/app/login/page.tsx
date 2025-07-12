@@ -28,8 +28,14 @@ export default function LoginPage() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, token: otp }),
         });
+
         const data = await res.json();
-        alert(data.success ? 'Login correcto' : 'OTP inválido');
+
+        if (data.success) {
+            alert(`✅ Login correcto\nValor de TEST_VARIABLE: ${data.testValue}`);
+        } else {
+            alert('❌ OTP inválido');
+        }
     };
 
     return (

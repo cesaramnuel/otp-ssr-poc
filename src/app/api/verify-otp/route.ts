@@ -13,5 +13,9 @@ export async function POST(req: NextRequest) {
     const isValid = authenticator.check(token, secret);
     if (isValid) clearOTP(email);
 
-    return NextResponse.json({ success: isValid });
+    return NextResponse.json({
+        success: isValid,
+        message: isValid ? 'OTP válido' : 'OTP inválido',
+        testValue: isValid ? process.env.TEST_VARIABLE : undefined,
+    });
 }
